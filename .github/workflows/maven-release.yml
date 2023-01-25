@@ -1,0 +1,26 @@
+name: maven
+
+on:
+  workflow_call:
+    secrets:
+      GPG_PRIVATE_KEY:
+        required: false
+      GPG_PASSPHRASE:
+        required: false
+      GIT_USER_EMAIL:
+        required: false
+      OSS_USERNAME:
+        required: false
+      OSS_PASSWORD:
+        required: false
+
+
+jobs:
+  maven:
+    uses: dbstar-org/general/.github/workflows/maven-release.yml@v1
+    secrets:
+      GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+      GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+      GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
+      OSS_USERNAME: ${{ secrets.OSS_USERNAME }}
+      OSS_PASSWORD: ${{ secrets.OSS_PASSWORD }}
