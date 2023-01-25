@@ -1,0 +1,25 @@
+name: maven
+
+on:
+  workflow_call:
+    secrets:
+      SONAR_PROJECT_KEY:
+        required: false
+      SONAR_TOKEN:
+        required: false
+      SONAR_HOST_URL:
+        required: false
+      GPG_PRIVATE_KEY:
+        required: false
+      GPG_PASSPHRASE:
+        required: false
+
+jobs:
+  maven:
+    uses: dbstar-org/general/.github/workflows/maven.yml@main
+    secrets:
+      SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+      GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
