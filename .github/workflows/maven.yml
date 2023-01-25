@@ -2,6 +2,12 @@ name: maven
 
 on:
   workflow_call:
+    inputs:
+      MAVEN_OPTS:
+        description: 'Parameters used to start up the JVM running Maven.'
+        default: ${{ vars.MAVEN_OPTS }}
+        required: false
+        type: string
     secrets:
       SONAR_PROJECT_KEY:
         required: false
@@ -17,6 +23,8 @@ on:
 jobs:
   maven:
     uses: dbstar-org/general/.github/workflows/maven.yml@v1
+    with:
+      MAVEN_OPTS: ${{ inputs.MAVEN_OPTS }}
     secrets:
       SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

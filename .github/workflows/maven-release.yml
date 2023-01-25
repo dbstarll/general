@@ -2,6 +2,12 @@ name: maven
 
 on:
   workflow_call:
+    inputs:
+      MAVEN_OPTS:
+        description: 'Parameters used to start up the JVM running Maven.'
+        default: ${{ vars.MAVEN_OPTS }}
+        required: false
+        type: string
     secrets:
       GPG_PRIVATE_KEY:
         required: false
@@ -18,6 +24,8 @@ on:
 jobs:
   maven:
     uses: dbstar-org/general/.github/workflows/maven-release.yml@v1
+    with:
+      MAVEN_OPTS: ${{ inputs.MAVEN_OPTS }}
     secrets:
       GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
       GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
